@@ -154,9 +154,12 @@ uv run pytest -q          # 8 项测试；ELF 用例需要样本，缺失时自�
 uv run python bench/bench_speed.py
 ```
 
+# 应用
+
+我基于这个项目实现了一个 IDA 的插件 [ida-unicall](https://github.com/halfcity789/ida-unicall)，允许在 IDA 内实现便捷的模拟执行。
+
 ## Roadmap
 
-- ~~IDA 插件：在 Hex-Rays 伪代码中右键调用点直接模拟，参数自动预填、结果写回注释~~ 已交付，见 [ida-unicall](../ida-unicall)
 - ARM / ARM64 支持（Unicorn 本身已具备，需补加载器与调用约定）
 - PE delay-load import 支持
 
