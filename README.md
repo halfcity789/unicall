@@ -21,7 +21,10 @@
 # 使用 uv（推荐）
 uv sync --extra dev
 
-# 或使用 pip
+# 从 PyPI 安装（发行名 unicall-emu，导入名仍是 unicall）
+pip install unicall-emu
+
+# 或本地开发安装
 pip install -e .
 ```
 

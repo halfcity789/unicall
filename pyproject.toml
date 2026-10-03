@@ -27,10 +27,9 @@ dependencies = [
   "pyelftools>=0.29",
 ]
 
-# TODO: uncomment and fill in once the GitHub repository exists
-# [project.urls]
-# Homepage = "https://github.com/<user>/unicall"
-# Repository = "https://github.com/<user>/unicall"
+[project.urls]
+Homepage = "https://github.com/halfcity789/unicall"
+Repository = "https://github.com/halfcity789/unicall"
 
 [project.optional-dependencies]
 dev = ["pytest>=8.0"]
