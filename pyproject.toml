@@ -1,5 +1,6 @@
 [project]
-name = "unicall"
+# PyPI distribution name; the import name stays `unicall`
+name = "unicall-emu"
 version = "0.1.0"
 description = "Function-level emulation for PE & ELF on Unicorn — emulate any single function with one call"
 readme = "README.md"
@@ -10,7 +11,14 @@ keywords = ["unicorn", "emulation", "reverse-engineering", "malware-analysis", "
 classifiers = [
   "Development Status :: 4 - Beta",
   "Intended Audience :: Information Technology",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
   "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
   "Topic :: Security",
 ]
 dependencies = [
@@ -18,6 +26,11 @@ dependencies = [
   "capstone>=5.0",
   "pyelftools>=0.29",
 ]
+
+# TODO: uncomment and fill in once the GitHub repository exists
+# [project.urls]
+# Homepage = "https://github.com/<user>/unicall"
+# Repository = "https://github.com/<user>/unicall"
 
 [project.optional-dependencies]
 dev = ["pytest>=8.0"]
