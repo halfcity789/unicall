@@ -21,7 +21,7 @@ from unicall import Emu
 
 SAMPLE = os.environ.get(
     "UNICALL_SAMPLE",
-    r"D:\data\security\pentest\temp_extract_dir\RotaJakiro.malware")
+    r"RotaJakiro.malware")
 
 emu = Emu(SAMPLE)
 raw = open(SAMPLE, "rb").read()

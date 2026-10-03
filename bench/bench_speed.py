@@ -20,7 +20,7 @@ from unicall import Emu                      # noqa: E402
 
 SAMPLE = sys.argv[1] if len(sys.argv) > 1 else os.environ.get(
     "UNICALL_SAMPLE",
-    r"D:\data\security\pentest\temp_extract_dir\RotaJakiro.malware")
+    r"RotaJakiro.malware")
 
 
 def bench(fn, n, label):
