@@ -21,7 +21,7 @@
 # 使用 uv（推荐）
 uv sync --extra dev
 
-# 从 PyPI 安装（发行名 unicall-emu，导入名仍是 unicall）
+# 从 PyPI 安装
 pip install unicall-emu
 
 # 或本地开发安装
@@ -35,12 +35,12 @@ pip install -e .
 ```python
 from unicall import Emu
 
-emu = Emu("sample.bin")                       # ELF / PE 由魔数自动识别
+emu = Emu("sample.bin")
 
-# 注册外部符号 hook（第一个形参是 emu，返回值写入 RAX）
+# 注册外部符号
 emu.hook_import("malloc", lambda e, n: e.malloc(n))
 
-# 调用任意地址的函数；bytes 自动放入模拟内存并以指针传入
+# 调用任意地址的函数
 out = emu.call(0x402B80, [blob, 48, 35, key, 8], ret="str")
 ```
 
@@ -81,7 +81,6 @@ print(emu.call(0x402B80, [blob2, 48, 35, 0x61F2F0, 8], ret="str"))
 # ".dbus/sessions/session-dbus"
 ```
 
-<!-- TODO: 放置 IDA 中的分析截图（建议内容：str_decrypt 反编译视图与调用点） -->
 ![ida-example](docs/images/ida-example.png)
 
 完整示例见 [examples/rotajakiro_str_decrypt.py](examples/rotajakiro_str_decrypt.py)。
