@@ -4,11 +4,6 @@
 
 `unicall` maps a binary into the Unicorn engine, redirects external symbols (GOT/IAT) to Python-implementable trampolines, and exposes a unified `call()` API for invoking arbitrary functions at arbitrary addresses. It is designed for malware analysis tasks such as string decryption, algorithm extraction, and deobfuscation, where the analyst wants to reuse the binary's own code instead of reimplementing its (possibly customized) cryptography in Python.
 
-> 主要文档为中文。代码注释与调试输出为英文。
-
-<!-- TODO: 放置项目架构图（建议内容：Loader -> Trampoline -> call() API 三层结构） -->
-![architecture](docs/images/architecture.png)
-
 ## 特性
 
 - **双格式统一 API**：`Emu()` 按文件魔数自动识别 ELF / PE（x86/x64），加载、环境搭建、hook 一次完成，调用任意函数只需一行 `call()`。
@@ -39,7 +34,7 @@ from unicall import Emu
 
 emu = Emu("sample.bin")                       # ELF / PE 由魔数自动识别
 
-# 可选：注册外部符号 hook（第一个形参是 emu，返回值写入 RAX）
+# 注册外部符号 hook（第一个形参是 emu，返回值写入 RAX）
 emu.hook_import("malloc", lambda e, n: e.malloc(n))
 
 # 调用任意地址的函数；bytes 自动放入模拟内存并以指针传入
@@ -72,13 +67,10 @@ from unicall import Emu
 
 emu = Emu("RotaJakiro.malware")
 
-# 调用点 1：密文位于 .rodata @0x4187E0（0xE0 字节），key 位于 .data @0x61F300
 blob = raw[0x4187E0 - 0x400000 : 0x4187E0 - 0x400000 + 0xE0]
 print(emu.call(0x402B80, [blob, 0xE0, 0xDE, 0x61F300, 8], ret="str"))
 # "#system-daemon - configure for system daemon ... exec %s respawn"
 
-# 调用点 2：密文是 6 个 qword 立即数直接写入栈帧（内存中小端序），
-# key 指针直接传镜像内地址 0x61F2F0
 blob2 = struct.pack("<6Q", 0xF749A7CADD299C76, 0x11DF18E2058F0AFD,
                     0xCD8E4E37DDD8F707, 0x0C6E9C5005E1A46E,
                     0xBAA9BCA78BA1353A, 0xC59F3C76339D733C)
@@ -88,9 +80,6 @@ print(emu.call(0x402B80, [blob2, 48, 35, 0x61F2F0, 8], ret="str"))
 
 <!-- TODO: 放置 IDA 中的分析截图（建议内容：str_decrypt 反编译视图与调用点） -->
 ![ida-example](docs/images/ida-example.png)
-
-<!-- TODO: 放置批量解密工作流图（建议内容：scaffold 生成骨架 -> 人工提取栈密文 -> json 批量解密 -> 写回注释） -->
-![workflow](docs/images/workflow.png)
 
 完整示例见 [examples/rotajakiro_str_decrypt.py](examples/rotajakiro_str_decrypt.py)。
 
@@ -126,6 +115,7 @@ print(emu.call(0x402B80, [blob2, 48, 35, 0x61F2F0, 8], ret="str"))
 - 反混淆：执行解混淆例程还原控制流或数据
 - CTF：快速调用题目二进制中的关键函数
 - 安全自动化：作为管道组件批量处理样本（无逆向工具依赖）
+- 坐标解密：懂的都懂
 
 ## API 速查
 
