@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+dist/
+build/
+.pytest_cache/
+.ruff_cache/
+
+# IDA databases（分析样本时可能拷进来）
+*.i64
+*.id0
+*.id1
+*.id2
+*.nam
+*.til
+
+# 样本与产物（原则上不入库，分析者自备）
+*.malware
+*.exe
+*.bin
+decrypted_strings.json
+sites_template.json
+batch_log.txt
+test_sites.json
