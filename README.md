@@ -163,7 +163,7 @@ uv run python bench/bench_speed.py
 
 ## Roadmap
 
-- IDA 插件：在 Hex-Rays 伪代码中右键调用点直接模拟，参数自动预填、结果写回注释
+- ~~IDA 插件：在 Hex-Rays 伪代码中右键调用点直接模拟，参数自动预填、结果写回注释~~ 已交付，见 [ida-unicall](../ida-unicall)
 - ARM / ARM64 支持（Unicorn 本身已具备，需补加载器与调用约定）
 - PE delay-load import 支持
 
